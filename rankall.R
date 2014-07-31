@@ -6,14 +6,11 @@ rankall <- function (outcome, num = "best") {
     data <- read.csv ("outcome-of-care-measures.csv", colClasses = "character")
     
     ## Check that outcome is valid
-    if (!outcome %in% c("heart attack", "heart failure", "pneumonia")) {
+    outcomes <- c("heart attack" = 11, "heart failure" = 17, "pneumonia" = 23)
+    if (!outcome %in% names(outcome)) {
         stop ("invalid outcome")
     }
-    
-    ## Find column corresponding to the outcome
-    outcomes <- c("heart attack" = 11, "heart failure" = 17, "pneumonia" = 23)
     colnum <- outcomes[outcome]
-
 
     ## Make smaller matrix of rows with no NAs and cols we need
     row_index <- !("Not Available" == (data[,colnum]))
